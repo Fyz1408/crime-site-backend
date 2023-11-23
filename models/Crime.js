@@ -80,6 +80,4 @@ const CrimeSchema = new mongoose.Schema({
   },
 });
 
-const Crime = mongoose.model('crime', CrimeSchema);
-
-module.exports = { Crime };
+module.exports = mongoose.model('Crime', CrimeSchema);

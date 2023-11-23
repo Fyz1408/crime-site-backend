@@ -41,6 +41,4 @@ const TexasSchema = new mongoose.Schema({
   },
 })
 
-const Texas = mongoose.model('texas', TexasSchema);
-
-module.exports = { Texas };
+module.exports = mongoose.model('Texas', TexasSchema);

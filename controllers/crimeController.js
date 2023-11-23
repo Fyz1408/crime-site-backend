@@ -6,7 +6,7 @@ exports.getAllCrime = async (req, res) => {
     const allCrime = await Crime.find().limit(100);
     return res.status(200).json(allCrime);
   } catch (e) {
-    res.send(e); // TODO Don't send the full error in production
+    res.send(e);
   }
 };
 

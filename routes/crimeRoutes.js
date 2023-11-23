@@ -1,17 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const Crime = require('../models/Crime'); // Import your Crime model
+const Crime = require('../models/Crime');
+const crimeController = require("../controllers/crimeController");
 
-router.get("/", async (req, res) => {
-  try {
-    const allCrime = await Crime.find();
-    console.log("GET /crime", allCrime);
-    return res.status(200).json(allCrime);
-  } catch (e) {
-    res.send(e); // TODO Don't send the full error in production
-  }
-});
-
-// Add more crime-related routes as needed
+// GET all crimes
+router.get('/', crimeController.getAllCrime);
 
 module.exports = router;

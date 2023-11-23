@@ -8,6 +8,6 @@ exports.getAllCrime = async (req, res) => {
 
     return res.status(200).json(allCrimes);
   } catch (e) {
-    res.send(e); // TODO Dont send full error in prod
+    res.send(e);
   }
 };
