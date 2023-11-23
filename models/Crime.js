@@ -1,4 +1,3 @@
-// Models
 const mongoose = require("mongoose");
 
 // Schema for crime
