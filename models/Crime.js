@@ -1,21 +1,22 @@
 const mongoose = require("mongoose");
 
 // Schema for crime
+const MixedCrime = new mongoose.Schema({
+  any: mongoose.Schema.Types.Mixed
+});
+
 const CrimeSchema = new mongoose.Schema({
   DR_NO: {
     type: Number,
   },
   'Date Rptd': {
-    type: Date,
-    default: Date.now,
+    type: String,
   },
   'DATE OCC': {
-    type: Date,
-    default: Date.now,
+    type: String,
   },
   'TIME OCC': {
     type: Number,
-    default: Date.now,
   },
   AREA: {
     type: Number,
@@ -79,4 +80,4 @@ const CrimeSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('Crime', CrimeSchema);
+module.exports = mongoose.model('Crime', MixedCrime, 'crime');
