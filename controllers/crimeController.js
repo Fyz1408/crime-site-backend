@@ -3,7 +3,7 @@ const Crime = require("../models/Crime");
 // Gets all crime
 exports.getAllCrime = async (req, res) => {
   try {
-    const allCrime = await Crime.find().limit(25);
+    const allCrime = await Crime.find().limit(25).sort({'Date Rptd': -1});
     return res.status(200).json(allCrime);
   } catch (e) {
     res.send(e);
@@ -15,7 +15,7 @@ exports.getLimitedCrime = async (req, res) => {
   try {
     const {amount} = req.params;
 
-    const allCrime = await Crime.find().limit(amount);
+    const allCrime = await Crime.find().limit(amount).sort({'Date Rptd': -1});
     return res.status(200).json(allCrime);
   } catch (e) {
     res.send(e);
