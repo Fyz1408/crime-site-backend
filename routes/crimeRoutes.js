@@ -9,6 +9,10 @@ router.get('/count', crimeController.getAllCrimeCount);
 router.get('/genders', crimeController.getGenderCount);
 router.get('/weapons', crimeController.getWeaponsCount);
 router.get('/street', crimeController.getStreetCount);
+router.get('/area', crimeController.getAreaCount);
 router.get('/desc', crimeController.getCrimesDesc);
+router.get('/date', crimeController.getCrimeDates);
+router.get('/date/:year', crimeController.getCrimeDatesByYear);
+router.get('/time', crimeController.getCrimeTimes);
 
 module.exports = router;

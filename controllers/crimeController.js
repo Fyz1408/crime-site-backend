@@ -33,7 +33,7 @@ exports.getAllCrimeCount = async (req, res) => {
   }
 };
 
-// Get count on crimes female or male
+// Get count on the victims gender: female, male or other
 exports.getGenderCount = async (req, res) => {
   try {
     const response = await Crime.aggregate([
@@ -70,6 +70,7 @@ exports.getGenderCount = async (req, res) => {
   }
 };
 
+// Gets the different weapons used in crimes
 exports.getWeaponsCount = async (req, res) => {
   try {
     const response = await Crime.aggregate([
@@ -89,12 +90,86 @@ exports.getWeaponsCount = async (req, res) => {
   }
 };
 
+// Gets the streets where crime has occurred
 exports.getStreetCount = async (req, res) => {
   try {
     const response = await Crime.aggregate([
       {
         $group: {
           _id: "$LOCATION",
+          count: { $count: { } }
+        }
+      },
+      {
+        $match: {
+          count: { $gt: 45 }
+        }
+      },
+      {
+        $sort: { count: 1 }
+      }
+    ]);
+
+    return res.status(200).json(response);
+  } catch (e) {
+    res.send(e);
+  }
+};
+
+// Gets the area where crimes has occurred
+exports.getAreaCount = async (req, res) => {
+  try {
+    const response = await Crime.aggregate([
+      {
+        $group: {
+          _id: "$AREA NAME",
+          count: { $count: { } }
+        }
+      },
+      {
+        $match: {
+          count: { $gt: 200 }
+        }
+      },
+      {
+        $sort: { count: 1 }
+      }
+    ]);
+
+    return res.status(200).json(response);
+  } catch (e) {
+    res.send(e);
+  }
+};
+
+// Gets the different crimes
+exports.getCrimesDesc = async (req, res) => {
+  try {
+    const response = await Crime.aggregate([
+      {
+        $group: {
+          _id: "$Crm Cd Desc",
+          count: { $count: { } }
+        }
+      },
+      {
+      $sort: { count: -1 }
+      }
+    ]);
+
+    return res.status(200).json(response);
+  } catch (e) {
+    res.send(e);
+  }
+};
+
+// Gets the crimes with date
+exports.getCrimeDates = async (req, res) => {
+  try {
+    const response = await Crime.aggregate([
+      {
+        $group: {
+          _id: "$DATE OCC",
           count: { $count: { } }
         }
       }, {
@@ -108,16 +183,43 @@ exports.getStreetCount = async (req, res) => {
   }
 };
 
-exports.getCrimesDesc = async (req, res) => {
+// Gets the crimes with date
+exports.getCrimeDatesByYear = async (req, res) => {
+  try {
+    const {year} = req.params;
+
+    const response = await Crime.aggregate([
+      {
+        $match: { "DATE OCC": new RegExp(year) }
+      },
+      {
+        $group: {
+          _id: "$DATE OCC",
+          count: { $count: { } }
+        }
+      },
+      {
+        $sort: { count: -1 }
+      }
+    ]);
+
+    return res.status(200).json(response);
+  } catch (e) {
+    res.send(e);
+  }
+};
+
+// Gets the crimes with date
+exports.getCrimeTimes = async (req, res) => {
   try {
     const response = await Crime.aggregate([
       {
         $group: {
-          _id: "$Crm Cd Desc",
+          _id: "$TIME OCC",
           count: { $count: { } }
         }
       }, {
-      $sort: { count: -1 }
+        $sort: { count: -1 }
       }
     ]);
 
