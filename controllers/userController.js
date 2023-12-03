@@ -3,7 +3,7 @@ const User = require('../models/User');
 // Get all users
 exports.getAllUsers = async (req, res) => {
   try {
-    const users = await User.find();
+    const users = await User.find().select('_id name email date');
     res.status(200).json(users);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -27,6 +27,23 @@ exports.createUser = async (req, res) => {
     const user = new User(req.body);
     const savedUser = await user.save();
     res.status(201).json(savedUser);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+// Login with a username and password
+exports.login = async (req, res) => {
+  try {
+    const { username, password } = req.body;
+
+    const user = await User.findOne({ username, password });
+
+    if (user) {
+      res.json({ success: true, message: 'Login successful' });
+    } else {
+      res.json({ success: false, message: 'Invalid credentials' });
+    }
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
