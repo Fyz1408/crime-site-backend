@@ -3,10 +3,11 @@ const mongoose = require('mongoose');
 const app = express();
 const cors = require("cors");
 
-// Import your route files
+// Import route files
 const crimeRoutes = require('./routes/crimeRoutes');
 const userRoutes = require('./routes/userRoutes');
 const texasRoutes = require('./routes/texasRoutes');
+const messageRoutes = require('./routes/messageRoutes');
 
 // Get environment variables
 const dotenv = require('dotenv');
@@ -18,9 +19,10 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 app.use(cors());
 
-// Route files
+// Use route files
 app.use("/crime", crimeRoutes);
 app.use("/users", userRoutes);
+app.use("/messages", messageRoutes);
 app.use("/texas",texasRoutes);
 
 const start = async () => {
