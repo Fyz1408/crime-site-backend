@@ -35,9 +35,9 @@ exports.createUser = async (req, res) => {
 // Login with a username and password
 exports.login = async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
 
-    const user = await User.findOne({ username, password });
+    const user = await User.findOne({ email, password });
 
     if (user) {
       res.json({ success: true, message: 'Login successful' });
