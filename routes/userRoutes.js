@@ -10,4 +10,8 @@ router.get('/:id', userController.getUserById);
 router.post('/login', userController.login);
 router.post('/register', userController.createUser);
 
+// DELETE request
+router.delete('/delete/:id', userController.deleteUser);
+
+
 module.exports = router;

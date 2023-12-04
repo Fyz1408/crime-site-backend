@@ -15,7 +15,7 @@ dotenv.config();
 const url = process.env.URL || "mongodb://localhost:27017/";
 const port = process.env.PORT || 3000;
 
-// Setup cors
+// Setup API to handle JSON & setup cors
 app.use(express.json());
 app.use(cors());
 
