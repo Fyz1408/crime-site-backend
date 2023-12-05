@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 
 // Schema for crime
-const MixedCrime = new mongoose.Schema({
+const MixedCrime =
+  new mongoose.Schema({
   any: mongoose.Schema.Types.Mixed
 });
 
